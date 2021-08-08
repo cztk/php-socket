@@ -65,7 +65,7 @@ class BasicStreamClient
         if (!$this->setSocketOptions()) {
             return false;
         }
-        if (!socket_connect($this->connection_socket, $this->socket_address, $this->socket_port)) {
+        if (!@socket_connect($this->connection_socket, $this->socket_address, $this->socket_port)) {
             $this->handleSocketError($this->connection_socket);
             return false;
         }
