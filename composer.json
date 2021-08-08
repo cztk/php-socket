@@ -4,7 +4,8 @@
     "description": "Socket handling abstraction",
     "type": "library",
     "require": {
-        "php": ">=7.4.0"
+        "php": ">=7.4.0",
+        "ext-sockets": "*"
     },
     "require-dev": {
     },

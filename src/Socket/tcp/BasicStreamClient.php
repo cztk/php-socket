@@ -17,7 +17,7 @@ class BasicStreamClient
     public int $socket_send_timeout_usecs = 0;
 
     public string $socket_address;
-    public int $server_port = 1370;
+    public int $socket_port = 1370;
 
     public int $debug_level = 5;
     public $user_socket_error_handler = null;
@@ -44,7 +44,7 @@ class BasicStreamClient
             $this->socket_address = $config['server_address'];
         }
         if (isset($config['server_port'])) {
-            $this->server_port = $config['server_port'];
+            $this->socket_port = $config['server_port'];
         }
         if (isset($config['debug_level'])) {
             $this->debug_level = $config['debug_level'];
@@ -65,7 +65,7 @@ class BasicStreamClient
         if (!$this->setSocketOptions()) {
             return false;
         }
-        if (!socket_connect($this->connection_socket, $this->socket_address, $this->server_port)) {
+        if (!socket_connect($this->connection_socket, $this->socket_address, $this->socket_port)) {
             $this->handleSocketError($this->connection_socket);
             return false;
         }
@@ -82,7 +82,7 @@ class BasicStreamClient
 
     private function create(): bool
     {
-        $domain = $this->identifyGearServerDomain($this->geaer_server_address);
+        $domain = $this->identifyGearServerDomain($this->socket_address);
 
         $this->connection_socket = socket_create($domain, SOCK_STREAM, SOL_TCP);
         if (false === $this->connection_socket) {
