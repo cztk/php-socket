@@ -87,7 +87,7 @@ class BasicStreamClient
         $this->connection_socket = socket_create($domain, SOCK_STREAM, SOL_TCP);
         if (false === $this->connection_socket) {
             if ($this->debug_level < 1) {
-                echo "MysqlGear socket error: unable to create a socket of type $domain\n";
+                echo "socket error: unable to create a socket of type $domain\n";
             }
             $this->handleSocketError(null);
             return false;
@@ -112,7 +112,7 @@ class BasicStreamClient
         $errorcode = socket_last_error($socket);
         $errormsg = socket_strerror($errorcode);
         if ($this->debug_level < 1) {
-            echo "MysqlGear socket error: " . $errorcode . " - " . $errormsg . "\n";
+            echo "socket error: " . $errorcode . " - " . $errormsg . "\n";
         }
         socket_clear_error($socket);
         if (null != $this->user_socket_error_handler) {
